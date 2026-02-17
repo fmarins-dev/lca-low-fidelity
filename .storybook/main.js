@@ -15,11 +15,21 @@ const config = {
   ],
   framework: "@storybook/react-vite",
   async viteFinal(config) {
-    config.server = config.server || {}
-    config.server.watch = {
-      usePolling: true,
+    return {
+      ...config,
+      server: {
+        ...config.server,
+        hmr: {
+          ...(config.server?.hmr ?? {}),
+          host: 'localhost',
+        },
+        watch: {
+          ...(config.server?.watch ?? {}),
+          usePolling: true,
+          interval: 1000,
+        },
+      },
     }
-    return config
   },
 };
 export default config;

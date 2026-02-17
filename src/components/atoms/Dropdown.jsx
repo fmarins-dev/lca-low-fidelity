@@ -1,4 +1,5 @@
 import { forwardRef, useState, useRef, useEffect } from 'react'
+import { Label } from './Label'
 
 const CaretUpDownIcon = () => (
   <svg
@@ -32,6 +33,7 @@ export const Dropdown = forwardRef(function Dropdown(
     error,
     disabled = false,
     required = false,
+    optionalTag = false,
     options = [],
     value,
     onChange,
@@ -88,10 +90,7 @@ export const Dropdown = forwardRef(function Dropdown(
       className={`flex flex-col gap-2 w-full max-w-[348px] ${className}`}
     >
       {label && (
-        <label className="flex items-center gap-1 text-base font-semibold text-[#293845] leading-6">
-          {label}
-          {required && <span className="font-normal text-[#293845]">*</span>}
-        </label>
+        <Label label={label} required={required} optionalTag={optionalTag} />
       )}
       <div className="relative">
         <div
